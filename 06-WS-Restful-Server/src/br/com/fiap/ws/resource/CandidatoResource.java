@@ -41,9 +41,17 @@ public class CandidatoResource {
 	public Candidato buscar(@PathParam("id") int codigo) {
 		return dao.buscar(codigo);
 	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Candidato> listar()
+	{
+		return dao.listar();
+	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
+	// Context UriInfo - Pega a url atual (/rest/candidato/id)
 	public Response cadadstrar(Candidato candidato, @Context UriInfo uri)
 	{
 		try
@@ -59,13 +67,6 @@ public class CandidatoResource {
 			return Response.serverError().build();
 		}
 		// Cria a resposta 201 created	
-	}
-	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<Candidato> listar()
-	{
-		return dao.listar();
 	}
 	
 	@PUT
